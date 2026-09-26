@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SocialPulse AI — Prototype
 
 ## Run in VS Code
@@ -35,3 +36,6 @@ The exact backend request depends on your API provider. Put the provider-specifi
 
 ## Platform logos
 The frontend includes the six logo images supplied for this prototype under `frontend/assets/`.
+=======
+
+>>>>>>> ca34f43562815b885123f5c4ac2962b17ba527c6
