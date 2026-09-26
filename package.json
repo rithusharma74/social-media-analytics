@@ -1,0 +1,6 @@
+{
+  "name":"socialpulse-ai",
+  "version":"1.0.0",
+  "scripts":{"start":"node backend/server.js"},
+  "dependencies":{"dotenv":"^16.4.5","express":"^4.21.2"}
+}

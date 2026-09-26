@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SocialPulse AI — Live Analytics</title>
+<style>
+:root{--bg:#f5f7fa;--panel:#ffffff;--panel2:#f8fafc;--text:#172033;--muted:#718096;--line:#e3e8ef;--accent:#2563eb;--accent2:#0f766e;--danger:#dc5365;--warning:#c58a19;--shadow:0 5px 20px rgba(20,35,55,.06)}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+.app{display:flex;min-height:100vh}.side{width:235px;border-right:1px solid var(--line);padding:22px 16px;background:#fff;position:fixed;inset:0 auto 0 0}.brand{font-size:21px;font-weight:800;margin:0 0 30px}.brand span{color:var(--accent)}.nav{display:grid;gap:8px}.nav button{background:transparent;border:1px solid transparent;color:#667085;padding:12px;border-radius:9px;text-align:left;font-size:14px;cursor:pointer;transition:.2s}.nav button.active{background:#eef4ff;color:#1554c7;border-color:#d7e5ff;font-weight:700;box-shadow:inset 3px 0 0 var(--accent)}.nav button:hover{background:#f3f6fa;color:#172033}.main{margin-left:235px;width:calc(100% - 235px);padding:24px;max-width:1600px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.title h1{margin:0;font-size:27px}.title p{color:var(--muted);margin:6px 0}.live{display:flex;align-items:center;gap:8px;background:#eefbf5;border:1px solid #ccefe0;color:#19734c;border-radius:20px;padding:8px 12px;font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:#22a06b;box-shadow:0 0 8px rgba(34,160,107,.4);animation:pulse 1s infinite}.controls{display:flex;gap:8px;flex-wrap:wrap}.controls button,.controls input{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:9px 12px}.controls button{cursor:pointer}.controls button.active{border-color:var(--accent);color:var(--accent)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:17px;box-shadow:var(--shadow)}.kpi .icon{font-size:22px}.kpi .num{font-size:29px;font-weight:800;margin:8px 0}.change{font-size:12px;color:#5de0a5}.muted{color:var(--muted);font-size:12px}.sectiongrid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}.wide{grid-column:1/-1}.card h2{font-size:16px;margin:0 0 16px}.barrow{margin:15px 0}.barhead{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}.bar{height:9px;background:#edf1f5;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .7s ease}.topic{display:grid;grid-template-columns:1fr 100px 75px;align-items:center;gap:10px;margin:12px 0}.topic .bar{height:8px}.badge{font-size:11px;padding:4px 7px;border-radius:10px;background:#143329;color:#5de0a5;text-align:center}.donutwrap{display:flex;align-items:center;gap:22px}.donut{width:180px;height:180px;border-radius:50%;background:conic-gradient(#6c7cff 0 28%,#ff4d8d 28% 52%,#35c7ff 52% 71%,#4ade80 71% 84%,#ffc857 84% 92%,#a78bfa 92% 100%);position:relative}.donut:after{content:"";position:absolute;inset:35px;background:var(--panel);border-radius:50%}.legend{display:grid;gap:9px;font-size:12px}.legend span{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}.insight{border-left:3px solid var(--accent);padding:11px 13px;background:#f7faff;border-radius:8px;margin:9px 0;font-size:13px}.flash{animation:flash .45s}.updated{font-size:11px;color:var(--muted);margin-top:4px}.network{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.network .mini{padding:12px;background:#f7f9fb;border-radius:10px;text-align:center}.mini b{display:block;font-size:20px;margin-top:5px}.platforms{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:14px 0 0}
+.platform{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:12px;color:#344054;box-shadow:0 2px 8px rgba(20,35,55,.04)}
+.platform img,.legend .plogo,.topic .plogo{width:22px;height:22px;object-fit:cover;border-radius:6px;display:inline-block}
+.platform img{width:20px;height:20px}
+.platform.active{border-color:#b8c9e8;box-shadow:0 0 0 2px rgba(37,99,235,.07)}
+.platform .status{width:6px;height:6px;border-radius:50%;background:#22a06b}
+.footer{text-align:center;color:#60768d;font-size:11px;padding:24px}@keyframes pulse{50%{opacity:.35}}@keyframes flash{50%{box-shadow:0 0 0 2px rgba(25,211,197,.55)}}@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}.sectiongrid{grid-template-columns:1fr}.network{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.side{position:static;width:100%;height:auto}.app{display:block}.main{margin:0;width:100%;padding:14px}.nav{display:flex;overflow:auto}.grid{grid-template-columns:1fr 1fr}.topic{grid-template-columns:1fr 70px}.topic .bar{display:none}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand">SocialPulse <span>AI</span></div>
+  <div class="nav">
+    <button class="active" data-view="overview">Overview</button><button data-view="audience">Audience Analysis</button><button data-view="trending">Trending Topics</button><button data-view="network">Network Analysis</button><button data-view="insights">AI Insight Feed</button>
+  </div>
+</aside>
+<main class="main">
+<header class="top">
+ <div class="title"><h1>Social Media Analytics Dashboard</h1><p>Real-time prototype intelligence across multiple platforms</p></div>
+ <div class="live"><i class="dot"></i><b>LIVE</b><span id="ago">updated 0s ago</span></div>
+</header>
+<div class="controls">
+ <button data-range="24h" class="active">24H</button><button data-range="7d">7D</button><button data-range="30d">30D</button>
+ <input id="from" type="date"><input id="to" type="date"><button id="apply">📅 Apply period</button>
+</div>
+<div class="platforms" aria-label="Connected platforms">
+ <div class="platform active"><img src="assets/x.jpg" alt="X"><span>X</span><i class="status"></i></div>
+ <div class="platform"><img src="assets/instagram.webp" alt="Instagram"><span>Instagram</span><i class="status"></i></div>
+ <div class="platform"><img src="assets/telegram.jpg" alt="Telegram"><span>Telegram</span><i class="status"></i></div>
+ <div class="platform"><img src="assets/facebook.png" alt="Facebook"><span>Facebook</span><i class="status"></i></div>
+ <div class="platform"><img src="assets/reddit.jpg" alt="Reddit"><span>Reddit</span><i class="status"></i></div>
+ <div class="platform"><img src="assets/youtube.png" alt="YouTube"><span>YouTube</span><i class="status"></i></div>
+</div>
+
+<section class="grid" id="kpis">
+ <div class="card kpi"><div class="icon">💬</div><div class="muted">Total Mentions</div><div class="num" id="mentions">24,580</div><div class="change">▲ +12.4%</div></div>
+ <div class="card kpi"><div class="icon">😊</div><div class="muted">Positive Sentiment</div><div class="num" id="positive">64.8%</div><div class="change">▲ +4.7%</div></div>
+ <div class="card kpi"><div class="icon">👥</div><div class="muted">Engagement Rate</div><div class="num" id="engage">72.5%</div><div class="change">▲ +8.2%</div></div>
+ <div class="card kpi"><div class="icon">🔥</div><div class="muted">Trend Growth</div><div class="num" id="growth">64.2%</div><div class="change">▲ +16.1%</div></div>
+</section>
+
+<section class="sectiongrid">
+ <div class="card">
+  <h2>📊 Sentiment Analysis</h2>
+  <div class="barrow"><div class="barhead"><span>😊 Positive</span><b id="pval">64.8%</b></div><div class="bar"><div id="pbar" class="fill" style="width:64.8%"></div></div></div>
+  <div class="barrow"><div class="barhead"><span>😐 Neutral</span><b id="nval">21.7%</b></div><div class="bar"><div id="nbar" class="fill" style="width:21.7%"></div></div></div>
+  <div class="barrow"><div class="barhead"><span>😠 Negative</span><b id="negval">13.5%</b></div><div class="bar"><div id="negbar" class="fill" style="width:13.5%"></div></div></div>
+ </div>
+ <div class="card">
+  <h2>👥 Audience by Platform</h2>
+  <div class="donutwrap"><div class="donut"></div><div class="legend">
+   <div><span style="background:#6c7cff"></span><img class="plogo" src="assets/x.jpg" alt=""> X <b>28.4%</b></div>
+   <div><span style="background:#ff4d8d"></span><img class="plogo" src="assets/instagram.webp" alt=""> Instagram <b>23.7%</b></div>
+   <div><span style="background:#35c7ff"></span><img class="plogo" src="assets/youtube.png" alt=""> YouTube <b>19.2%</b></div>
+   <div><span style="background:#4ade80"></span><img class="plogo" src="assets/telegram.jpg" alt=""> Telegram <b>12.8%</b></div>
+   <div><span style="background:#ffc857"></span><img class="plogo" src="assets/facebook.png" alt=""> Facebook <b>9.6%</b></div>
+   <div><span style="background:#a78bfa"></span><img class="plogo" src="assets/reddit.jpg" alt=""> Reddit <b>6.3%</b></div>
+  </div></div>
+ </div>
+ <div class="card wide">
+  <h2>🔥 Trending Topics <span class="muted">— live growth percentage</span></h2>
+  <div id="topics"></div>
+ </div>
+ <div class="card">
+  <h2>🌐 Network Analysis</h2>
+  <div class="network">
+   <div class="mini">Spread<b id="spread">72.5%</b></div><div class="mini">Influence<b id="influence">81.3%</b></div><div class="mini">Connectivity<b id="connect">68.7%</b></div><div class="mini">Cross-platform<b id="cross">54.9%</b></div>
+  </div>
+ </div>
+ <div class="card">
+  <h2>🤖 AI Insight Feed</h2>
+  <div class="insight">🔥 <b>Trend Alert:</b> AI Automation is accelerating across multiple platforms.</div>
+  <div class="insight">😊 <b>Sentiment:</b> Positive conversation is currently above the selected-period baseline.</div>
+  <div class="insight">🌐 <b>Network:</b> Cross-platform sharing is increasing.</div>
+ </div>
+</section>
+<div class="footer">SocialPulse AI prototype • Demo analytics are generated locally unless a backend API is connected.</div>
+</main></div>
+
+<script>
+const topics=[
+ ["AI Automation",64.2,"X","assets/x.jpg"],["Gaming",41.8,"YouTube","assets/youtube.png"],["Technology",35.6,"Instagram","assets/instagram.webp"],["Education",27.4,"Telegram","assets/telegram.jpg"],["Business",18.9,"Facebook","assets/facebook.png"],["Creator Economy",15.7,"Reddit","assets/reddit.jpg"]
+];
+const $=id=>document.getElementById(id);
+function renderTopics(){
+ $("topics").innerHTML=topics.map((t,i)=>`<div class="topic"><div><b><img class="plogo" src="${t[3]}" alt="${t[2]}"> ${t[0]}</b><span class="muted" style="margin-left:7px">${t[2]}</span><div class="bar"><div class="fill" style="width:${Math.min(100,t[1])}%"></div></div></div><b>${t[1].toFixed(1)}%</b><span class="badge">+${t[1].toFixed(1)}%</span></div>`).join("");
+}
+renderTopics();
+
+let seconds=0, range="24h";
+function jitter(v,amt=0.35){return Math.max(0,Math.min(99.9,v+(Math.random()-.48)*amt))}
+function update(){
+ seconds++; $("ago").textContent=`updated ${seconds}s ago`;
+ const vals={p:jitter(parseFloat($("pval").textContent),.55), n:jitter(parseFloat($("nval").textContent),.35), e:jitter(parseFloat($("engage").textContent),.5), g:jitter(parseFloat($("growth").textContent),.7)};
+ vals.neg=Math.max(0,100-vals.p-vals.n);
+ $("pval").textContent=vals.p.toFixed(1)+"%"; $("pbar").style.width=vals.p+"%";
+ $("nval").textContent=vals.n.toFixed(1)+"%"; $("nbar").style.width=vals.n+"%";
+ $("negval").textContent=vals.neg.toFixed(1)+"%"; $("negbar").style.width=vals.neg+"%";
+ $("positive").textContent=vals.p.toFixed(1)+"%"; $("engage").textContent=vals.e.toFixed(1)+"%"; $("growth").textContent=vals.g.toFixed(1)+"%";
+ $("mentions").textContent=(24580+Math.floor(seconds*(range==="24h"?3:range==="7d"?8:14))+Math.floor(Math.random()*8)).toLocaleString();
+ ["spread","influence","connect","cross"].forEach(id=>{const el=$(id);el.textContent=jitter(parseFloat(el.textContent),.45).toFixed(1)+"%";});
+ topics.forEach((t,i)=>t[1]=Math.max(2,jitter(t[1],.9)));
+ renderTopics();
+ document.querySelectorAll(".card").forEach(c=>{c.classList.remove("flash");void c.offsetWidth;c.classList.add("flash")});
+}
+setInterval(update,1000);
+
+document.querySelectorAll("[data-range]").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("[data-range]").forEach(x=>x.classList.remove("active"));b.classList.add("active");range=b.dataset.range;
+ const factor=range==="24h"?1:range==="7d"?1.08:1.18;
+ $("growth").textContent=(64.2*factor).toFixed(1)+"%"; $("mentions").textContent=Math.round(24580*factor).toLocaleString();
+});
+$("apply").onclick=()=>{
+ if(!$("from").value||!$("to").value){alert("Select both From and To dates.");return}
+ const a=new Date($("from").value),b=new Date($("to").value);const days=Math.max(1,Math.round((b-a)/86400000)+1);
+ const factor=Math.min(1.35,0.85+days/100);
+ $("mentions").textContent=Math.round(18000*factor).toLocaleString();
+ $("growth").textContent=(48+days*.65).toFixed(1)+"%";
+ $("engage").textContent=(61+Math.min(days,30)*.35).toFixed(1)+"%";
+ seconds=0;$("ago").textContent="updated 0s ago";
+};
+const today=new Date(), iso=d=>d.toISOString().slice(0,10); $("to").value=iso(today); const prev=new Date(today-86400000); $("from").value=iso(prev);
+// Navigation selection: each section behaves like a real dashboard view.
+document.querySelectorAll(".nav button").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+   btn.classList.add("active");
+   const target=btn.dataset.view;
+   const map={overview:"kpis",audience:"pbar",trending:"topics",network:"spread",insights:""};
+   const el=map[target] && $(map[target]);
+   if(el && el.scrollIntoView) el.scrollIntoView({behavior:"smooth",block:"center"});
+ });
+});
+</script>
+</body>
+</html>
